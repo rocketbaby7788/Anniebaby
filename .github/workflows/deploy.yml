@@ -16,12 +16,13 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Debug: show runner info
+      - name: "Debug: show runner info"
         run: |
           echo "GITHUB_REPOSITORY=${GITHUB_REPOSITORY}"
           echo "GITHUB_REPOSITORY_OWNER=${GITHUB_REPOSITORY_OWNER}"
           echo "GITHUB_ACTOR=${GITHUB_ACTOR}"
-          echo "Permissions: contents=${{ toJson(permissions.contents) }} packages=${{ toJson(permissions.packages) }} actions=${{ toJson(permissions.actions) }}"
+          # printing permissions via expressions in a multiline run can break YAML parsing in some runners
+          # keep debug output simple to avoid workflow syntax issues
           docker --version || true
           uname -a || true
 
